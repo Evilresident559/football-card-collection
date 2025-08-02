@@ -22,5 +22,37 @@
     "market_value": "$1,200",
     "image_path": "joe_montana_card.png",
     "category": "vintage"
+  },
+  {
+    "player": "Caleb Williams",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "caleb_williams_card.jpg",
+    "category": "rookie"
+  },
+  {
+    "player": "Jayden Daniels",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "jayden_daniels_card.jpg",
+    "category": "rookie"
+  },
+  {
+    "player": "Jared Goff",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "jared_goff_card.jpg",
+    "category": "veteran"
+  },
+  {
+    "player": "Jordan Jefferson",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "jordan_jefferson_card.jpg",
+    "category": "rookie"
   }
 ]
