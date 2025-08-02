@@ -4,12 +4,79 @@
   activation and sets the current year in the footer.
 */
 
+let cards = [];
+let cardsSection =
+  typeof document !== 'undefined'
+    ? document.getElementById('cards-section')
+    : null;
+let navLinks;
+let imageModal;
+let modalImage;
+
+// Display cards based on selected category
+function displayCards(category) {
+  if (!cardsSection) return;
+
+  // Clear previous content
+  cardsSection.innerHTML = '';
+
+  // Determine which cards to show
+  let filtered;
+  if (category === 'home') {
+    filtered = cards;
+  } else {
+    filtered = cards.filter(card => card.category === category);
+  }
+
+  // Show message if no cards are available
+  if (filtered.length === 0) {
+    const message = document.createElement('p');
+    message.textContent = 'No cards available in this category.';
+    cardsSection.appendChild(message);
+    return;
+  }
+
+  // Render each card
+  filtered.forEach(card => {
+    const cardElem = document.createElement('div');
+    cardElem.classList.add('card');
+    cardElem.innerHTML = `
+      <img src="${card.image_path}" alt="${card.player} ${card.year}" />
+      <div class="card-details">
+        <h3>${card.player}</h3>
+        <p><strong>Year:</strong> ${card.year}</p>
+        <p><strong>Condition:</strong> ${card.condition}</p>
+        <p><strong>Market Value:</strong> ${card.market_value}</p>
+      </div>
+    `;
+    cardsSection.appendChild(cardElem);
+
+    // Add click handler to enlarge image if modal elements exist
+    if (imageModal && modalImage) {
+      const img = cardElem.querySelector('img');
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modalImage.classList.remove('zoomed');
+        imageModal.classList.add('show');
+      });
+    }
+  });
+}
+
+// Utility setters for testing
+function setCards(data) {
+  cards = data;
+}
+
+function setCardsSection(section) {
+  cardsSection = section;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  const cardsSection = document.getElementById('cards-section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const imageModal = document.getElementById('image-modal');
-  const modalImage = document.getElementById('modal-image');
-  let cards = [];
+  cardsSection = document.getElementById('cards-section');
+  navLinks = document.querySelectorAll('.nav-link');
+  imageModal = document.getElementById('image-modal');
+  modalImage = document.getElementById('modal-image');
 
   // Fetch card data from the JSON file
   fetch('cards.json')
@@ -27,52 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error loading cards:', err);
       cardsSection.innerHTML = '<p>Unable to load card data.</p>';
     });
-
-  // Display cards based on selected category
-  function displayCards(category) {
-    // Clear previous content
-    cardsSection.innerHTML = '';
-
-    // Determine which cards to show
-    let filtered;
-    if (category === 'home') {
-      filtered = cards;
-    } else {
-      filtered = cards.filter(card => card.category === category);
-    }
-
-    // Show message if no cards are available
-    if (filtered.length === 0) {
-      const message = document.createElement('p');
-      message.textContent = 'No cards available in this category.';
-      cardsSection.appendChild(message);
-      return;
-    }
-
-    // Render each card
-    filtered.forEach(card => {
-      const cardElem = document.createElement('div');
-      cardElem.classList.add('card');
-      cardElem.innerHTML = `
-        <img src="${card.image_path}" alt="${card.player} ${card.year}" />
-        <div class="card-details">
-          <h3>${card.player}</h3>
-          <p><strong>Year:</strong> ${card.year}</p>
-          <p><strong>Condition:</strong> ${card.condition}</p>
-          <p><strong>Market Value:</strong> ${card.market_value}</p>
-        </div>
-      `;
-      cardsSection.appendChild(cardElem);
-
-      // Add click handler to enlarge image
-      const img = cardElem.querySelector('img');
-      img.addEventListener('click', () => {
-        modalImage.src = img.src;
-        modalImage.classList.remove('zoomed');
-        imageModal.classList.add('show');
-      });
-    });
-  }
 
   // Handle navigation link clicks
   navLinks.forEach(link => {
@@ -103,3 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.classList.toggle('zoomed');
   });
 });
+
+if (typeof module !== 'undefined') {
+  module.exports = { displayCards, setCards, setCardsSection };
+}
