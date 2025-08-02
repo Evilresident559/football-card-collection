@@ -148,6 +148,14 @@ if (typeof document !== 'undefined') {
     resetZoom();
   });
 
+  // Close modal when pressing Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && imageModal.classList.contains('show')) {
+      imageModal.classList.remove('show');
+      resetZoom();
+    }
+  });
+
   // Toggle zoom on modal image
   modalImage.addEventListener('click', event => {
     event.stopPropagation();

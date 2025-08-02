@@ -106,3 +106,59 @@ describe('displayCards', () => {
     expect(card.querySelector('.card-details')).toBeNull();
   });
 });
+
+describe('image modal', () => {
+  test('pressing Escape closes the modal', () => {
+    const listeners = {};
+    const imageModal = {
+      classList: {
+        classes: new Set(['show']),
+        add(cls) {
+          this.classes.add(cls);
+        },
+        remove(cls) {
+          this.classes.delete(cls);
+        },
+        contains(cls) {
+          return this.classes.has(cls);
+        }
+      },
+      addEventListener: () => {}
+    };
+    const modalImage = {
+      addEventListener: () => {},
+      classList: { remove: () => {} },
+      style: {}
+    };
+
+    global.document = {
+      addEventListener: (event, handler) => {
+        listeners[event] = handler;
+      },
+      getElementById: id => {
+        if (id === 'cards-section') return { innerHTML: '', appendChild: () => {} };
+        if (id === 'image-modal') return imageModal;
+        if (id === 'modal-image') return modalImage;
+        if (id === 'current-year') return { textContent: '' };
+        return null;
+      },
+      querySelectorAll: () => [],
+      createElement: () => ({
+        classList: { add: () => {} },
+        innerHTML: '',
+        appendChild: () => {},
+        querySelector: () => null
+      })
+    };
+    global.window = { addEventListener: () => {} };
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve([]) });
+
+    jest.resetModules();
+    require('./script');
+    listeners['DOMContentLoaded']();
+
+    expect(imageModal.classList.contains('show')).toBe(true);
+    listeners['keydown']({ key: 'Escape' });
+    expect(imageModal.classList.contains('show')).toBe(false);
+  });
+});
