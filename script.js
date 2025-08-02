@@ -40,14 +40,24 @@ function displayCards(category) {
   filtered.forEach(card => {
     const cardElem = document.createElement('div');
     cardElem.classList.add('card');
+    const details = [];
+    if (card.player) details.push(`<h3>${card.player}</h3>`);
+    if (card.year) details.push(`<p><strong>Year:</strong> ${card.year}</p>`);
+    if (card.condition)
+      details.push(`<p><strong>Condition:</strong> ${card.condition}</p>`);
+    if (card.market_value)
+      details.push(`<p><strong>Market Value:</strong> ${card.market_value}</p>`);
+
+    const detailsHtml =
+      details.length > 0
+        ? `<div class="card-details">${details.join('')}</div>`
+        : '';
+
     cardElem.innerHTML = `
-      <img src="${card.image_path}" alt="${card.player} ${card.year}" />
-      <div class="card-details">
-        <h3>${card.player}</h3>
-        <p><strong>Year:</strong> ${card.year}</p>
-        <p><strong>Condition:</strong> ${card.condition}</p>
-        <p><strong>Market Value:</strong> ${card.market_value}</p>
-      </div>
+      <img src="${card.image_path}" alt="${[card.player, card.year]
+        .filter(Boolean)
+        .join(' ')}" />
+      ${detailsHtml}
     `;
     cardsSection.appendChild(cardElem);
 
@@ -72,11 +82,12 @@ function setCardsSection(section) {
   cardsSection = section;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  cardsSection = document.getElementById('cards-section');
-  navLinks = document.querySelectorAll('.nav-link');
-  imageModal = document.getElementById('image-modal');
-  modalImage = document.getElementById('modal-image');
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    cardsSection = document.getElementById('cards-section');
+    navLinks = document.querySelectorAll('.nav-link');
+    imageModal = document.getElementById('image-modal');
+    modalImage = document.getElementById('modal-image');
 
   // Fetch card data from the JSON file
   fetch('cards.json')
@@ -124,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.classList.toggle('zoomed');
   });
 });
+}
 
 if (typeof module !== 'undefined') {
   module.exports = { displayCards, setCards, setCardsSection };

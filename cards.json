@@ -1,9 +1,5 @@
 [
   {
-    "player": "Tom Brady",
-    "year": 2000,
-    "condition": "Mint",
-    "market_value": "$15,000",
     "image_path": "tom_brady_card.png",
     "category": "rookie"
   },
