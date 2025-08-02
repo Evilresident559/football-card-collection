@@ -7,6 +7,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const cardsSection = document.getElementById('cards-section');
   const navLinks = document.querySelectorAll('.nav-link');
+  const imageModal = document.getElementById('image-modal');
+  const modalImage = document.getElementById('modal-image');
   let cards = [];
 
   // Fetch card data from the JSON file
@@ -61,6 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       cardsSection.appendChild(cardElem);
+
+      // Add click handler to enlarge image
+      const img = cardElem.querySelector('img');
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modalImage.classList.remove('zoomed');
+        imageModal.classList.add('show');
+      });
     });
   }
 
@@ -81,4 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Set the current year in the footer
   document.getElementById('current-year').textContent = new Date().getFullYear();
+
+  // Close modal when clicked outside image
+  imageModal.addEventListener('click', () => {
+    imageModal.classList.remove('show');
+  });
+
+  // Toggle zoom on modal image
+  modalImage.addEventListener('click', event => {
+    event.stopPropagation();
+    modalImage.classList.toggle('zoomed');
+  });
 });
