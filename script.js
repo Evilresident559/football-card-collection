@@ -12,6 +12,24 @@ let cardsSection =
 let navLinks;
 let imageModal;
 let modalImage;
+let isZoomed = false;
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let translateX = 0;
+let translateY = 0;
+
+function resetZoom() {
+  isZoomed = false;
+  isDragging = false;
+  translateX = 0;
+  translateY = 0;
+  if (modalImage) {
+    modalImage.classList.remove('zoomed');
+    modalImage.style.transform = '';
+    modalImage.style.cursor = 'zoom-in';
+  }
+}
 
 // Display cards based on selected category
 function displayCards(category) {
@@ -127,12 +145,69 @@ if (typeof document !== 'undefined') {
   // Close modal when clicked outside image
   imageModal.addEventListener('click', () => {
     imageModal.classList.remove('show');
+    resetZoom();
   });
 
   // Toggle zoom on modal image
   modalImage.addEventListener('click', event => {
     event.stopPropagation();
-    modalImage.classList.toggle('zoomed');
+    if (isDragging) {
+      isDragging = false;
+      return;
+    }
+
+    if (!isZoomed) {
+      isZoomed = true;
+      modalImage.classList.add('zoomed');
+      modalImage.style.transform = 'translate(0px, 0px) scale(2)';
+      modalImage.style.cursor = 'grab';
+    } else {
+      resetZoom();
+    }
+  });
+
+  // Drag to pan when zoomed (mouse)
+  modalImage.addEventListener('mousedown', e => {
+    if (!isZoomed) return;
+    isDragging = true;
+    dragStartX = e.clientX - translateX;
+    dragStartY = e.clientY - translateY;
+    modalImage.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    translateX = e.clientX - dragStartX;
+    translateY = e.clientY - dragStartY;
+    modalImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(2)`;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    modalImage.style.cursor = 'grab';
+  });
+
+  // Drag to pan when zoomed (touch)
+  modalImage.addEventListener('touchstart', e => {
+    if (!isZoomed) return;
+    const touch = e.touches[0];
+    isDragging = true;
+    dragStartX = touch.clientX - translateX;
+    dragStartY = touch.clientY - translateY;
+  });
+
+  modalImage.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    translateX = touch.clientX - dragStartX;
+    translateY = touch.clientY - dragStartY;
+    modalImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(2)`;
+    e.preventDefault();
+  });
+
+  modalImage.addEventListener('touchend', () => {
+    isDragging = false;
   });
 });
 }

@@ -122,6 +122,7 @@ footer a {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: hidden;
 }
 
 .image-modal.show {
@@ -136,6 +137,9 @@ footer a {
 }
 
 .image-modal img.zoomed {
-  transform: scale(2);
-  cursor: zoom-out;
+  cursor: grab;
+}
+
+.image-modal img.zoomed:active {
+  cursor: grabbing;
 }
