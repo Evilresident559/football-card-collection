@@ -1,0 +1,26 @@
+[
+  {
+    "player": "Tom Brady",
+    "year": 2000,
+    "condition": "Mint",
+    "market_value": "$15,000",
+    "image_path": "tom_brady_card.png",
+    "category": "rookie"
+  },
+  {
+    "player": "Patrick Mahomes",
+    "year": 2017,
+    "condition": "Near Mint",
+    "market_value": "$7,500",
+    "image_path": "patrick_mahomes_card.png",
+    "category": "sale"
+  },
+  {
+    "player": "Joe Montana",
+    "year": 1981,
+    "condition": "Good",
+    "market_value": "$1,200",
+    "image_path": "joe_montana_card.png",
+    "category": "vintage"
+  }
+]

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football Card Collection</title>
+    <!-- Link to the stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <header>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#" class="nav-link active" data-category="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-category="rookie">Rookie Cards</a></li>
+          <li><a href="#" class="nav-link" data-category="vintage">Vintage Cards</a></li>
+          <li><a href="#" class="nav-link" data-category="sale">For Sale</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main content area -->
+    <main>
+      <!-- Home section introduction -->
+      <section id="home" class="content-section">
+        <h1>Welcome to My Football Card Collection</h1>
+        <p>
+          Explore my collection of football trading cards. Browse through rookie
+          cards, vintage treasures, and cards currently available for sale. Each
+          card includes important details like condition and market value.
+        </p>
+      </section>
+
+      <!-- Cards will be dynamically injected into this section -->
+      <section id="cards-section" class="cards-section"></section>
+    </main>
+
+    <!-- Footer with contact information -->
+    <footer>
+      <p>
+        Contact:
+        <a href="mailto:collector@example.com">collector@example.com</a>
+      </p>
+      <p>
+        &copy; <span id="current-year"></span> Football Card Collection. All
+        rights reserved.
+      </p>
+    </footer>
+
+    <!-- JavaScript to handle data loading and filtering -->
+    <script src="script.js"></script>
+  </body>
+</html>
