@@ -4,7 +4,7 @@
     "category": "rookie"
   },
   {
-    "image_path": "patrick_mahomes_card.png",
+    "image_path": "patrick_mahones_card.png",
     "category": "sale"
   },
   {
@@ -42,5 +42,53 @@
     "market_value": "",
     "image_path": "jordan_jefferson_card.jpg",
     "category": "rookie"
+  },
+  {
+    "player": "Jalen Royals",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "jalen_royals_card.jpg",
+    "category": "sale"
+  },
+  {
+    "player": "Kaleb Johnson",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "kaleb_johnson_card.jpg",
+    "category": "sale"
+  },
+  {
+    "player": "Bijan Robinson",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "bijan_robinson_card.jpg",
+    "category": "sale"
+  },
+  {
+    "player": "Joe Burrow",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "joe_burrow_card.jpg",
+    "category": "sale"
+  },
+  {
+    "player": "Mike Alstott",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "mike_alstott_card.jpg",
+    "category": "sale"
+  },
+  {
+    "player": "Emeka Egbuka",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "emeka_egbuka_card.jpg",
+    "category": "sale"
   }
 ]
