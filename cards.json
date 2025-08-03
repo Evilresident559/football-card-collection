@@ -90,5 +90,21 @@
     "market_value": "",
     "image_path": "emeka_egbuka_card.jpg",
     "category": "sale"
+  },
+  {
+    "player": "Will Howard",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "will_howard_card.jpg",
+    "category": "sale"
+  },
+  {
+    "player": "Brian Thomas Jr.",
+    "year": 2025,
+    "condition": "Mint",
+    "market_value": "",
+    "image_path": "brian_thomas_jr_card.jpg",
+    "category": "sale"
   }
 ]
